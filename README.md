@@ -1,4 +1,4 @@
-# htmlGameShop
+# htmlGame
 A lots of game developed by canvas or webgl,just for fun.
 # \web
 the front-end of the project
