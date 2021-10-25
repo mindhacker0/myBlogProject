@@ -1,9 +1,9 @@
 class ResponseObject{
-   constructor({result}){
-       this.result = result || {};
-       this.isSuccess = "true";
-       this.errors = null;
-   }
+    constructor({result,errors=null}){
+        this.result = result || null;
+        this.isSuccess = errors?false:true;
+        this.errors = errors;
+    }
 }
 
 module.exports = ResponseObject;

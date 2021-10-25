@@ -4,9 +4,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var expressJwt = require('express-jwt');
 var publicRouter = require('./routes/public');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
 var homeRouter = require('./routes/home');
 var app = express();
 // view engine setup
@@ -32,9 +32,15 @@ app.all("*",function(req,res,next){
         next();
     }
 });
+app.use(expressJwt({//ps:这一步主要是做jwt验证的,验证通过jsonwebtoken生成的token
+  algorithms: ['HS256'],
+  secret: 'secret12345',  // 签名的密钥 或 PublicKey
+}).unless({
+  path: ['/user/login','/getUserRoute']  // 指定路径不经过 Token 解析
+}));
 // app.use('/',history());//前端设置history模式不会报错
 app.use('/', publicRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/home', homeRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,40 @@
+.login-modal{
+    width: 420px;
+    height: 300px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+    border-radius: 16px;
+}
+.modal-container{
+    padding: 20px 0;
+}
+.close-btn{
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    color: rgba(221, 221, 221, .8);
+    cursor: pointer;
+}
+.close-btn i{
+    text-shadow: 2px 2px 6px #999;
+}
+.tab-container{
+    
+}
+.tab-head{
+   text-align: center;
+}
+.tab-title{
+   display: inline-block;
+   font-size: 20px;
+   padding: 0 10px;
+   cursor: pointer;
+}
+.active-tab{
+   color: aqua;
+}

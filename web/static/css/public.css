@@ -1,0 +1,23 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: hsla(0, 0%, 0%, 0.2);
+}
+.pretty-button{
+    display: inline-block;    
+    font-size: 13px;    
+    line-height: 32px;    
+    height: 32px;    
+    padding: 0 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1, 0 -6px 4px #fefefe, inset 0 0 3px 0 #cecfd1;  
+    border: 1px solid #ccc;    
+    border-radius: 16px;    
+}
+.pretty-button:hover{
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1, 0 -6px 4px #fefefe, inset 0 0 3px 3px #cecfd1;
+}

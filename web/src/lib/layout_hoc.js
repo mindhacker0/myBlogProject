@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Header from "../components/header";
 const LayoutHoc=(WrappedComponent)=>{
     class AppWapper extends React.Component{
         constructor(props){
@@ -8,7 +9,7 @@ const LayoutHoc=(WrappedComponent)=>{
         render(){
             const {history,location,...componentProps} = this.props;
             return  <div className='app-layout'>
-                    {/* <Header history={history} location={location}/> */}
+                    <Header history={history} location={location}/>
                     <div className='content'><WrappedComponent { ...componentProps }/></div>
                     {/* <Footer /> */}
                 </div>

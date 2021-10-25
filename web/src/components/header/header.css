@@ -1,0 +1,25 @@
+.head-wrap{
+  width: 100%;
+  box-shadow: 0 4px 3px 1px #eee;
+}
+.head-container{
+   max-width:1600px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
+   height: 60px;
+   line-height: 60px;
+   padding: 0 20px;
+}
+.icon{
+    
+}
+.menu{
+
+}
+.right-menu{
+
+}
+.user-info{
+    display: inline-block; 
+}

@@ -12,7 +12,7 @@ const errorHandler = async (error) => {console.log(error);
 * 配置request请求时的默认参数
 */
 const headers = { 
-  Authorization: "",
+  Authorization: localStorage.getItem("token"),
 };
 const extendRequest = extend({
   errorHandler,

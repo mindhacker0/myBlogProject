@@ -4,6 +4,7 @@ class HomeController{
         
     }
     async getList(req, res, next){
+        console.log(req.user)
         const data = [{
             name:"guss",
             icon:`/images/gussIcon.jpeg`

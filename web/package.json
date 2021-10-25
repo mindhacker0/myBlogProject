@@ -1,5 +1,5 @@
 {
-  "name": "htmlGameShop",
+  "name": "htmlGameHome",
   "description": "write html game for fun.",
   "version": "1.0.0",
   "main": "index.js",
@@ -59,12 +59,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mindhacker0/htmlGameShop.git"
+    "url": "git+https://github.com/mindhacker0/htmlGameHome.git"
   },
   "author": "@zpf",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mindhacker0/htmlGameShop/issues"
+    "url": "https://github.com/mindhacker0/htmlGameHome/issues"
   },
-  "homepage": "https://github.com/mindhacker0/htmlGameShop#readme"
+  "homepage": "https://github.com/mindhacker0/htmlGameHome#readme"
 }

@@ -1,0 +1,23 @@
+.login-wrap{
+    text-align: center;
+    padding: 20px 0 0;
+}
+.form-wrap{
+    padding: 20px 0;
+}
+.form-item{
+    padding: 3px 0;
+    display: inline-block;
+}
+.login-btn{
+    width: 240px;
+    padding: 8px 0;
+    text-align: center;
+    margin:0 auto;
+    background: #efefef;
+    border-radius: 6px;
+    color: #999;
+    text-shadow: 0 2px 6px #666;
+    box-shadow:inset 1px 1px 6px 4px #999;
+    cursor: pointer;
+}

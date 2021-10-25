@@ -30,7 +30,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			"process.env": {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-				baseUrl: devmode ? "'http://localhost:3000'" : "''",
+				baseUrl: devmode ? "'http://localhost:8099'" : "''",
 			},
 		}),
 		new HtmlWebpackPlugin({
