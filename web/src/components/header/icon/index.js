@@ -4,16 +4,13 @@ const Icon = (props) => {
     let canvas = useRef(null);
     useEffect(()=>{
         if(canvas.current){
-            let image = new Image;
             let ctx = canvas.current.getContext("2d");
-            image.src = "./static/images/game-icon.jpeg";
-            image.onload = ()=>{
-                ctx.drawImage(image,10,5,image.width/10,image.height/10);
-            }
+            ctx.font = "32px mengquruantang";
+            ctx.strokeText('小灰灰的博客', 0, 36); 
         }
     },[]);
-    return (<div>
-        <canvas ref={canvas} width="100" height="60"/>
+    return (<div style={{height:"60px"}}>
+        <canvas ref={canvas} width="200" height="60"/>
     </div>)
 }
 export default Icon;

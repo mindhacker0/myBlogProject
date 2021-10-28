@@ -1,6 +1,9 @@
 .head-wrap{
   width: 100%;
   box-shadow: 0 4px 3px 1px #eee;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 .head-container{
    max-width:1600px;
@@ -12,14 +15,16 @@
    padding: 0 20px;
 }
 .icon{
-    
+  
 }
 .menu{
-
+ 
 }
 .right-menu{
 
 }
 .user-info{
-    display: inline-block; 
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
 }

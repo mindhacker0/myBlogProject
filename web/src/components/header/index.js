@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 import styles from "./header.css";
 import Icon from "./icon";
 import UserInfo from "./userInfo";
+import HeadMenu from "./headMenu";
 const Header = (props) => {
     
     return (<div className={styles.headWrap}>
         <div className={styles.headContainer}>
-            <div>
-                <div className={styles.icon}><Icon /></div>
-                <div className={styles.menu}></div>
-            </div>
+            <div className={styles.icon}><Icon /></div>
+            <div className={styles.menu}><HeadMenu /></div>
             <div className={styles.rightMenu}>
                 <div className={styles.userInfo}><UserInfo /></div>
                 <div className={"pretty-button"}><span>创作</span></div>

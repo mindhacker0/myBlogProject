@@ -8,12 +8,7 @@ const errorHandler = async (error) => {console.log(error);
   const { response, request } = error;
   return response;
 };
-/**
-* 配置request请求时的默认参数
-*/
-const headers = { 
-  Authorization: localStorage.getItem("token"),
-};
+
 const extendRequest = extend({
   errorHandler,
   // 默认错误处理
@@ -21,6 +16,9 @@ const extendRequest = extend({
 });
 
 request.interceptors.request.use(async (url, options) => {
+    let headers = { 
+      Authorization: localStorage.getItem("token"),
+    };
     return {
       url: `${process.env.baseUrl}${url}`,
       options: { ...options, headers: headers },

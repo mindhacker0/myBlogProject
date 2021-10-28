@@ -13,7 +13,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/gameshop');
+mongoose.connect('mongodb://localhost:27017/myblog');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

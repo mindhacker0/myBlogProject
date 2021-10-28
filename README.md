@@ -1,5 +1,5 @@
-# htmlGameHome
-A lots of game developed by canvas or webgl,just for fun.
+# what it for?
+my own blog that show my works and learnings.
 # \web
 the front-end of the project
 # \server

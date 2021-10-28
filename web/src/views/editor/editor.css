@@ -1,0 +1,31 @@
+.editor-view{
+    width: 100vw;
+    height: 100vh;
+    overflow-x:hidden;
+    overflow-y: auto;
+}
+.body-content{
+    width: 100%;
+    font-size: 0;
+}
+.project-wrap{
+    width: 250px;
+    height: 100vh;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}
+.editor-wrap{
+    width: calc(100%-850px);
+    height: 100vh;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}
+.preview-wrap{
+    width: 600px;
+    height: 100vh;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}

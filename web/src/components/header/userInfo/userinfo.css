@@ -1,3 +1,22 @@
 .login-button{
     margin-right: 10px;
 }
+.user-menu{
+    height: 60px;
+    text-align: center;
+    color: #888;
+}
+.user-icon{
+    height: 30px;
+    padding: 10px 0 0;
+}
+.default-icon{
+    height: 30px;
+    line-height: 30px;
+    font-size:30px;
+}
+.user-name{
+    line-height: 20px;
+    height: 20px;
+    font-size: 12px;
+}

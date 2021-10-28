@@ -1,11 +1,12 @@
 import { 
 	SET_USER_ROUTE,
-	SET_USER_LOGIN
+	SET_USER_LOGIN,
+	SET_USER_INFO
 } from './constant';
 
 const initialState = {
 	isLogin:false,
-	userInfo:null,
+	userInfo:{},
 	userRoute:[]
 };
 
@@ -20,6 +21,11 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				isLogin: payload.isLogin,
+			};
+		case SET_USER_INFO:
+			return {
+				...state,
+				userInfo: payload.userInfo,
 			};
 		default:
 			return state;

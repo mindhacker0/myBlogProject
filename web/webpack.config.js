@@ -9,6 +9,10 @@ const autoprefixer = require("autoprefixer");
 const postcssVars = require("postcss-simple-vars");
 const postcssImport = require("postcss-import");
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+//编辑器不适用css modules
+const APP_DIR = path.resolve(__dirname, './src');
+const MONACO_DIR = path.resolve(__dirname, './node_modules/');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 module.exports = {
 	entry: "./src/index.js",
 	output: {
@@ -16,6 +20,7 @@ module.exports = {
 		filename: "[name].[hash].js",
 		chunkFilename: "chunks/[name].[hash].js",
 	},
+	devtool: "source-map",
 	devServer: {
 		open: true,
 		port: process.env.PORT || 8095,
@@ -46,6 +51,10 @@ module.exports = {
 			options: {
 				productionSourceMap: true
 			}
+		}),
+		new MonacoWebpackPlugin({
+			// available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+			languages: ["json", "javascript", "html", "css"],
 		})
 	],
 	module: {
@@ -118,6 +127,7 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
+				include: APP_DIR,
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
@@ -157,6 +167,11 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.css$/,
+				include: MONACO_DIR,
+				use: ['style-loader', 'css-loader'],
+			}
 		]
 	}
 }

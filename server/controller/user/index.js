@@ -27,7 +27,6 @@ class UserController{
         if(password !== pwd){
             res.send(new ResponseObject({errors:"密码错误！"}));
         }
-        console.log(_id,user_name);
         let sign = jwt.sign(//生成jwt token
         {
             usrId:_id
@@ -44,6 +43,15 @@ class UserController{
             create_time,
             avatar,
             token
+        }}));
+    }
+    async getUserInfo(req, res, next){//获取用户信息
+        const {usrId} = req.user;
+        let {user_name,create_time,avatar} = await userModel.findById(usrId);
+        res.send(new ResponseObject({result:{
+            user_name,
+            create_time,
+            avatar,
         }}));
     }
 }

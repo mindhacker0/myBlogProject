@@ -1,30 +1,27 @@
 
-import React,{useEffect} from 'react';
+import React,{useLayoutEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import LayoutHoc from "../lib/layout_hoc";
 import { connect } from "react-redux";
 import routeList from "./route.config";
 import {getUserRoute} from "../reducers/user/constant";
 const NotFound = function(){
   return <div>404</div>
 };
-const RouteApp = ({userRoute,getUserRoute})=>{
-  useEffect(()=>{
+const RouteApp = function({userRoute,getUserRoute}){
+  useLayoutEffect(()=>{
     getUserRoute({});
   },[getUserRoute]);
-  const RouteComponent = (props)=>(<Switch>
-    {userRoute.map(({path,component,exact}, i) => (
-      <Route key={`page_route${i}`} path={path} component={routeList[component]} exact={exact}/>
-    ))}
-   <Route component={NotFound} />
- </Switch>);
- const LayoutPage = LayoutHoc(RouteComponent);
   return <Router>
     <Route
       path="/"
       render={(props) => (
         <React.Fragment>
-          <LayoutPage {...props}/>
+            <Switch>
+                {userRoute.map(({path,component,exact}, i) => (
+                  <Route key={`page_route${i}`} path={path} component={routeList[component]} exact={exact}/>
+                ))}
+                <Route component={NotFound} />
+            </Switch>
         </React.Fragment>
       )}
     />

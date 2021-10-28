@@ -21,3 +21,13 @@
 .pretty-button:hover{
     box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1, 0 -6px 4px #fefefe, inset 0 0 3px 3px #cecfd1;
 }
+@font-face {
+    font-family: 'mengquruantang';
+    src:url('./mengquruantang.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+:root{
+    --header-height:60px;
+    --content-width:1200px;
+}
