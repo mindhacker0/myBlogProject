@@ -12,16 +12,50 @@ class PublicController{
                 path: "/",
                 component:"Home",
                 exact: true,
-                id:'0',
+                pid:null,
                 create_time: Date.now().toString(),
                 icon:"",
+                children:[]
             },{
                 path: "/editor",
                 component:"Editor",
                 exact: false,
-                id:'1',
+                pid:null,
                 create_time: Date.now().toString(),
                 icon:"",
+                children:[]
+            },{
+                path: "/myblogs",
+                component:"Myblogs",
+                exact: false,
+                pid:null,
+                create_time: Date.now().toString(),
+                icon:"",
+                children:[]
+            },{
+                path: "/myblogs/:id",
+                component:"BlogDetail",
+                exact: false,
+                pid:null,
+                create_time: Date.now().toString(),
+                icon:"",
+                children:[]
+            },{
+                path: "/myproducts",
+                component:"MyProducts",
+                exact: false,
+                pid:null,
+                create_time: Date.now().toString(),
+                icon:"",
+                children:[]
+            },{
+                path: "/recommands",
+                component:"Recommands",
+                exact: false,
+                pid:null,
+                create_time: Date.now().toString(),
+                icon:"",
+                children:[]
             }];
             webRoute.create(data);
         }

@@ -13,10 +13,11 @@
     height: 100vh;
     display: inline-block;
     vertical-align: top;
+    background: #555;
     font-size: 14px;
 }
 .editor-wrap{
-    width: calc(100%-850px);
+    width: calc(100% - 850px);
     height: 100vh;
     display: inline-block;
     vertical-align: top;

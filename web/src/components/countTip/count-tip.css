@@ -1,0 +1,9 @@
+.item-wrap{
+    padding: 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.count{
+    padding: 0 2px;
+}

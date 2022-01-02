@@ -1,8 +1,9 @@
 
 import React,{useLayoutEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route,Routes} from "react-router-dom";
 import { connect } from "react-redux";
 import routeList from "./route.config";
+import LayoutHoc from "../lib/layout_hoc";
 import {getUserRoute} from "../reducers/user/constant";
 const NotFound = function(){
   return <div>404</div>
@@ -12,19 +13,15 @@ const RouteApp = function({userRoute,getUserRoute}){
     getUserRoute({});
   },[getUserRoute]);
   return <Router>
-    <Route
-      path="/"
-      render={(props) => (
-        <React.Fragment>
-            <Switch>
-                {userRoute.map(({path,component,exact}, i) => (
-                  <Route key={`page_route${i}`} path={path} component={routeList[component]} exact={exact}/>
-                ))}
-                <Route component={NotFound} />
-            </Switch>
-        </React.Fragment>
-      )}
-    />
+      <Routes>
+        <Route path="/">
+            {userRoute.map(({path,component,exact}, i) =>{
+              let RenderComponent = LayoutHoc(routeList[component]); 
+              return <Route key={`page_route${i}`} path={path} element={<RenderComponent />} exact={exact} />
+            })}
+            <Route element={<NotFound />}/>
+        </Route>
+      </Routes>
   </Router>
 }
 const mapStateToProps = (state) => {

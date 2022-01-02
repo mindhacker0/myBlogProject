@@ -5,7 +5,7 @@ const LayoutHoc=(WrappedComponent)=>{
     let path = window.location.pathname;
     const blackList = ["/editor"];
     let showHead = !blackList.includes(path);
-    const AppWapper = (props)=>{
+    const AppWapper = ()=>{
         return  <div className='app-layout'>
             {showHead && <Header />}
             <div className='content'><WrappedComponent /></div>

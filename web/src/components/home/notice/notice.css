@@ -1,0 +1,25 @@
+.notice-wrap{
+  border: 1px solid #ccc;
+  padding:10px;
+  border-radius: 6px;
+}
+.notice-title{
+  font-weight: 600;
+  font-size: 16px;
+}
+.content-title{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 520;
+}
+.content-wrap{
+   text-indent: 2rem;
+   padding: 20px 0;
+}
+.detail-wrap{
+  display: flex;
+  padding:10px 10px 0px; 
+  font-size: 12px;
+  color: #999;
+  justify-content: space-between;
+}

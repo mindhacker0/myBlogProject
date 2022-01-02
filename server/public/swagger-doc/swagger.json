@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-        "version": "1.0.5",
-        "title": "Swagger Petstore",
+        "description": "周鹏飞个人博客的接口文档，联系我[https://github.com/mindhacker0]",
+        "version": "1.0.0",
+        "title": "个人博客接口文档",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "email": "apiteam@swagger.io"
@@ -13,41 +13,42 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "petstore.swagger.io",
-    "basePath": "/v2",
+    "host": "192.168.1.147:8099",
+    "basePath": "/",
     "tags": [
         {
             "name": "home",
             "description": "首页展示的接口",
             "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
+                "description": "首页的推荐内容接口"
             }
         },
         {
             "name": "Public",
-            "description": "页面的公共接口"
+            "description": "页面的公共接口",
+            "externalDocs": {
+                "description": "动态路由"
+            }
         },
         {
             "name": "user",
-            "description": "Operations about user",
+            "description": "用户相关",
             "externalDocs": {
-                "description": "Find out more about our store",
-                "url": "http://swagger.io"
+                "description": "用户登录，获取用户信息等接口",
             }
         }
     ],
     "schemes": [
-        "https",
-        "http"
+        "http",
+        "https"
     ],
     "paths": {
-        "/home/getList": {
+        "/home/gethomeBlogList": {
             "post": {
                 "tags": [
                     "home"
                 ],
-                "summary": "获取首页游戏展示的列表",
+                "summary": "获取首页展示的博客列表",
                 "description": "",
                 "operationId": "uploadFile",
                 "consumes": [
@@ -99,7 +100,7 @@
             }
         },
         "/getUserRoute": {
-            "post": {
+            "get": {
                 "tags": [
                     "Public"
                 ],
@@ -114,20 +115,10 @@
                     "application/json",
                     "application/xml"
                 ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Pet object that needs to be added to the store",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Pet"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "responses": {
-                    "405": {
-                        "description": "Invalid input"
+                    "200": {
+                        "description": "请求成功"
                     }
                 },
                 "security": [

@@ -31,3 +31,21 @@
     --header-height:60px;
     --content-width:1200px;
 }
+.body-background{
+    background-image:url('../images/home_bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+}
+.one-line{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+.two-line{
+    overflow: hidden;
+    text-overflow: ellipsis ;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}

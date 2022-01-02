@@ -1,0 +1,25 @@
+.project-item{
+    padding-left: 6px;
+    color: #eee;
+}
+.projectTitle{
+    height: 32px;
+    line-height: 32px;
+}
+.file-item{
+   height: 28px;
+   line-height: 28px;
+   cursor: pointer;
+}
+.file-item>span{
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+    vertical-align: top;
+}
+.icon-js{
+   color: rgb(244, 222, 81);
+}
+.icon-html{
+    color: #d54924;
+}

@@ -2,7 +2,9 @@
 import React,{useEffect,useRef,useState} from 'react';
 import classNames from "classnames";
 import styles from "./head-menu.css";
+import {useNavigate} from "react-router-dom";
 const HeadMenu = (props) => {
+    const navigate = useNavigate();
     let [pathNow,setPathNow] = useState(window.location.pathname);
     useEffect(()=>{
         
@@ -24,10 +26,8 @@ const HeadMenu = (props) => {
         path:"/recommands",
         id:window.UUID()
     }]);
-    console.log(menuList);
     function switchRoute(path){
-        console.log("goto",path);
-        
+        navigate(path);
     }
     return (<div className={styles.menuWrap}>
     {menuList.current.map(({name,path,id})=>

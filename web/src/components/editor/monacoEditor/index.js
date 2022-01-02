@@ -1,8 +1,14 @@
 import PropTypes from "prop-types";
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import styles from "./monacoedit.css";
 import MonacoEditor from 'react-monaco-editor';
-const MonacoEditorComponent = ({width = '800', height="600", editorwarp})=>{
+const MonacoEditorComponent = ({
+  width = "800", 
+  height = "600", 
+  editorwarp, 
+  language,
+  editorValue
+})=>{
     const options = {
       selectOnLineNumbers: true,
       roundedSelection: false,
@@ -13,15 +19,18 @@ const MonacoEditorComponent = ({width = '800', height="600", editorwarp})=>{
     function onChange(value){
       setValue(value);
     }
-    function editorDidMount(){
-      console.log("monaco-editor mounted");
+    function editorDidMount(editor,monaco){//编辑器完成挂载
+      console.log("monaco-editor mounted",monaco);
     }
+    useEffect(()=>{
+      setValue(editorValue);
+    },[editorValue]);
     return (
     <div className={styles.edit} ref={editorwarp}>
         <MonacoEditor
         width={width}
         height={height}
-        language="javascript"
+        language={language}
         theme="vs-dark"
         value={value}
         options={options}

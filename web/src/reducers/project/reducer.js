@@ -1,16 +1,22 @@
 import { 
-	SET_PROJECT_LIST,
-	SET_FILE_FOLDER
+	SET_PROJECT_LIST
 } from './constant';
 let list = [{
 	project_name:"测试项目",
-	projec_id:"142142141",
+	id:UUID(),
 	cover:"",
 	create_time:"",
+	fileList:[{
+		id:UUID(),
+		fileName:"index.html",
+		fileType:"html",
+		create_time:"",
+		last_modify:"",
+		content:"console.log(Date.now());"
+	}]
 }];
 const initialState = {
-	projectList:[],
-	fileFolder:[],
+	projectList:list,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -19,11 +25,6 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				projectList:payload.projectList,
-			};
-		case SET_FILE_FOLDER:
-			return {
-				...state,
-				fileFolder:payload.fileFolder,
 			};
 		default:
 			return state;

@@ -1,0 +1,38 @@
+.blog-item-wrap{
+    background: #fff;
+    border: 1px solid #ccc;
+    padding:10px;
+    display: flex;
+    justify-content: stretch;
+    cursor: pointer;
+}
+.cover{
+   
+}
+.cover img{
+    width: 64px;
+    height: 64px;
+    display: block;
+}
+.content{
+    padding-left: 10px;
+}
+.title{
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.shortcut{
+    
+}
+.info-wrap{
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.blog-data{
+   display: flex;
+   justify-content: space-evenly;
+}

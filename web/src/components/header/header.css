@@ -4,6 +4,9 @@
   position: fixed;
   left: 0;
   top: 0;
+  background: #fff;
+  z-index: 1;
+  opacity: .8;
 }
 .head-container{
    max-width:1600px;

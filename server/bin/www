@@ -7,7 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
-
+// var https = require('https');
+// const path = require('path');
+// const fs = require("fs");
 /**
  * Get port from environment and store in Express.
  */
@@ -18,7 +20,15 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+// const cred = {
+//   key: fs.readFileSync(path.resolve(__dirname, '../lib/crypt/privkey.pem')),
+//   cert: fs.readFileSync(path.resolve(__dirname, '../lib/crypt/server.pem'))
+// }
+// const SSL_PORT = 443;
+// const httpsServer = https.createServer(cred, app);
+// httpsServer.listen(SSL_PORT, () => {
+//   console.log(`HTTPS Server is running on: https://localhost:${SSL_PORT}`);
+// });
 var server = http.createServer(app);
 
 /**

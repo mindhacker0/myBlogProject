@@ -1,0 +1,38 @@
+.introduce-wrap{
+    border: 1px solid #ccc;
+    padding:10px;
+    border-radius: 6px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.introduce-wrap :global(.person-info){
+    font-family: "mengquruantang";
+    padding: 0 5px 10px;
+}
+.title{
+    color: #89919a;
+    font-size: 22px;
+    padding-bottom: 10px;
+}
+.links-wrap{
+  display: flex;
+  justify-content: space-evenly;
+}
+.links-wrap :global(.contact-item){
+    cursor: pointer;
+}
+.links-wrap :global(.contact-item) span{
+    font-size: 28px;
+}
+:global(.icon-csdn){
+    color: rgb(221, 23, 0);
+}
+:global(.icon-mail){
+    color: #3399fe;
+}
+:global(.icon-wechat-fill){
+    color:rgb(81, 195, 50);
+}
+:global(.icon-QQ-circle-fill){
+    color:rgb(54, 155, 206);
+}
