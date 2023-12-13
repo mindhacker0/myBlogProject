@@ -17,6 +17,9 @@ class UserController{
             avatar:""});
         }
     }
+    async useRegister(req, res,next){
+        
+    }
     async userLogin(req, res, next){//用户登录
         const {account,pwd} = req.query;
         let data =await userModel.find({account});

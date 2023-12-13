@@ -1,10 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from "./app";
-import ReactModal from "react-modal";
-import 'antd/dist/antd.css';
-ReactModal.setAppElement(document.getElementById('root'));
-ReactDOM.render(
-  <App/>,
-  document.getElementById('root')
-);
+import {createRoot} from 'react-dom/client';
+// import ReactModal from "react-modal";
+// ReactModal.setAppElement(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
+root.render(<div>999</div>);

@@ -2,7 +2,7 @@
 
 var mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+//路由和权限数据模型
 const routeSchema = new Schema({
     path:String,
     component:String,
