@@ -1,0 +1,1 @@
+import {createStrore} from 'react-redux';

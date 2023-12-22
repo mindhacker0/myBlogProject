@@ -181,4 +181,16 @@ export function setCookie(name, value, Hours) {//设置cookie
 	  exp.toGMTString() +
 	  ";domain=360doc.com;";
   }
-  
+  // 对象深层递归合并
+export const deepMerge = function(target: object, source: object) {
+	for (const key in source) {
+	  if (Object.prototype.hasOwnProperty.call(source, key)) {
+		if (source[key] instanceof Object && key in target && target[key] instanceof Object) {
+		  deepMerge(target[key], source[key]);
+		} else {
+		  target[key] = source[key];
+		}
+	  }
+	}
+	return target;
+  };
