@@ -36,7 +36,25 @@ module.exports = {
                     importLoaders: 1,
                     sourceMap: devmode
                 },
-            },"sass-loader"]
+            },"sass-loader",{
+                loader:"postcss-loader",
+                options: {
+                    postcssOptions: {
+                      plugins: [
+                        [
+                          'autoprefixer',
+                          {
+                            overrideBrowserslist: [
+                                "last 3 versions",
+                                "Safari >= 8",
+                                "iOS >= 8",
+                            ],
+                          },
+                        ],
+                      ],
+                    },
+                },
+            }]
         }]
     }
 }

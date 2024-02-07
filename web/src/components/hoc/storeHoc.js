@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import store from "@/store";
+import { store } from "@/store";
 const AppStateHoc=(WrappedComponent)=>{
     class AppWapper extends React.Component{
         constructor(props){

@@ -3,7 +3,7 @@ import React,{useLayoutEffect} from 'react';
 import { BrowserRouter as Router, Route,Routes} from "react-router-dom";
 import { connect } from "react-redux";
 import routeList from "./route.config";
-import LayoutHoc from "../lib/layout_hoc";
+import LayoutHoc from "@/components/hoc/layout_hoc";
 const NotFound = function(){
   return <div>404</div>
 };
