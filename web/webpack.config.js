@@ -13,12 +13,13 @@ module.exports = {
     ],
     resolve: {
 		alias: {
-			"@": path.resolve("src")
+			"@": path.resolve(__dirname,"src")
 		},
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
 	},
     module:{
         rules:[{
-            test: /\.jsx|\.js$/,
+            test: /\.jsx|\.js$|\.ts$|\.tsx$/,
             exclude: /node_modules/,
             use: [{
                 loader: "babel-loader"
