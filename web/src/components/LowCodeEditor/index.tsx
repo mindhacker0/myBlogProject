@@ -15,7 +15,7 @@ import '../Urdf';
 import { RobotPlugin } from '../Urdf/Plugin';
 import { ManagerEditorPlugin } from './PluginManager';
 import { ControllerXPlugin } from '../TCPControl/Plugin';
-import { LevelContext } from '@/models/global';
+import {GlobalContext} from '@/models/global';
 setDefaultTheme('cxd');
 setThemeConfig(themeConfig);
 registerEditorPlugin(WorkFlowPlugin);
@@ -30,7 +30,7 @@ const defaultConfig:ServiceSchema = {
 };
 
 const LowCodeEditor = ()=>{
-        console.log("editor level",useContext(LevelContext))
+        console.log("editor level",useContext(GlobalContext))
 
     const [value,setValue] = useState<SchemaObject>(defaultConfig);
     const onEditorChange = (value:SchemaObject)=>{

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {IScopedContext, Renderer, RendererProps, ScopedContext} from 'amis';
 import URDFViewer from '@/urdf/urdf-viewer';
-import { LevelContext } from '@/models/global';
 
 interface MyRectProps extends RendererProps {
     style?:React.CSSProperties;

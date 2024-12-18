@@ -1,17 +1,17 @@
 
 import { Button, Input } from 'antd';
 import './singleButtons.less';
-import { useModel } from '@umijs/max';
 import { InfoCircleOutlined, MessageOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { formatDate } from '@/utils/date';
 import ReactJson from 'react-json-view';
+import { GlobalContext } from '@/models/global';
 const { TextArea } = Input;
 
 type KeyValue = {[k: string] : any};
 
 export default function SocketLog() {
-    const global = useModel('global');
+    const global = useContext(GlobalContext);
     const [visible, setVisible] = useState(false);
     const handleBtnClick = () => {
         setVisible(!visible)

@@ -1,17 +1,16 @@
 import { useRef, useEffect, useState, useContext } from "react";
 import URDFCustomManipulator from "./URDFCustomManipulator";
 // import SliderListComponent from "./sliderListComponent";
-import { useModel } from '@umijs/max';
 import { degreesToRadians, openFile, radiansToDegrees } from '@/utils/index';
 import {addFilesToUrdf, dataTransferToFiles} from "@/urdf/dragDrop";
-import { LevelContext } from "@/models/global";
+import { GlobalContext } from "@/models/global";
 if (!customElements.get('urdf-custom-manipulator')) {
     customElements.define('urdf-custom-manipulator', URDFCustomManipulator);
 }
 
 const URDFViewerComponent = props => {
-    console.log("level",useContext(LevelContext))
-    // const global = useModel('global');
+    console.log("level",GlobalContext)
+    const global = useContext(GlobalContext);
     
     const ref = useRef(null);
     const [joints, setJoints] = useState(null);
@@ -79,29 +78,29 @@ const URDFViewerComponent = props => {
         };
     }, []);
 
-    // useEffect(() => {
-        // console.log('robotInfo changed', global.robotInfo.jointPositions)
-        // for (let k in global.robotInfo.jointPositions) {
-        //     handleJointChange(k, String(global.robotInfo.jointPositions[k]))
-        // }
-        //console.log("move",ref.current.scene)
+    useEffect(() => {
+        console.log('robotInfo changed', global.robotInfo.jointPositions)
+        for (let k in global.robotInfo.jointPositions) {
+            handleJointChange(k, String(global.robotInfo.jointPositions[k]))
+        }
+        console.log("move",ref.current.scene)
 
         // todo: 要根据实际的末端位置，调用viewer的addPoint方法
-        // if (global.robotInfo.isMoving && ref.current) {
-            // let testValue = degreesToRadians(global.robotInfo.pose["x"]);
-            // // console.log("testValue", testValue);
-            // let radius = 5
-            // let x = global.robotInfo.pose["x"]
+        if (global.robotInfo.isMoving && ref.current) {
+            let testValue = degreesToRadians(global.robotInfo.pose["x"]);
+            // console.log("testValue", testValue);
+            let radius = 5
+            let x = global.robotInfo.pose["x"]
         
-        //     ref.current.addPoint(
-        //         global.robotInfo.pose["x"],
-        //         global.robotInfo.pose["y"],    
-        //         global.robotInfo.pose["z"],
-        //         global.robotInfo.pose["roll"],
-        //         global.robotInfo.pose["pitch"],
-        //         global.robotInfo.pose["yaw"]);
-        // }
-    // }, [global.robotInfo]);
+            ref.current.addPoint(
+                global.robotInfo.pose["x"],
+                global.robotInfo.pose["y"],    
+                global.robotInfo.pose["z"],
+                global.robotInfo.pose["roll"],
+                global.robotInfo.pose["pitch"],
+                global.robotInfo.pose["yaw"]);
+        }
+    }, [global.robotInfo]);
     //click to add file folder
     const openURDFFile = async()=>{
         const changeEvent = await openFile("*");

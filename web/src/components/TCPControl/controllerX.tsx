@@ -1,16 +1,15 @@
 import '../controller.less';
 import { InputNumber, message, Button } from "antd";
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
-import { useEffect, useState, useRef } from 'react';
-import { useModel } from '@umijs/max';
+import { useEffect, useState, useRef, useContext } from 'react';
 import regExp from '@/utils/regExp';
 import { formatUnit, capitalizeFirstLetter, reserveDecimal } from '@/utils/index';
 import { cloneDeep } from 'lodash';
 import useOutsideMouseUp from '@/hooks/useOutsideMouseUp';
+import { GlobalContext } from '@/models/global';
 
 export default function ControllerX() {
-
-    const global = useModel('global');
+    const global = useContext(GlobalContext);
     const robotInfo = global.robotInfo;
     const pose : { [k : string]: number | string } = robotInfo.pose;
     const [list, setList] = useState<{[key: string]: any}[]>([]);

@@ -1,14 +1,14 @@
 import '../controller.less';
 import { Button, InputNumber, message } from "antd";
-import { useModel } from '@umijs/max';
 import regExp from '@/utils/regExp';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { formatUnit, degreesToRadians, radiansToDegrees, reserveDecimal } from '@/utils/index';
 import useOutsideMouseUp from '@/hooks/useOutsideMouseUp';
 import { cloneDeep } from 'lodash';
+import { GlobalContext } from '@/models/global';
 
 export default function ControllerX() {
-    const global = useModel('global');
+    const global = useContext(GlobalContext);
     const jointPositions: { [key: string]: number | string } = global.robotInfo.jointPositions;
     const [list, setList] = useState<{ [key: string]: any }[]>([]);
     const currentClickButton = useRef<1 | 2 | null>(null);// 记录当前点的哪个按钮 正1反2

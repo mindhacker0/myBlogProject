@@ -1,12 +1,13 @@
 
 import { Button, Popconfirm } from 'antd';
 import './singleButtons.less';
-import { useModel } from '@umijs/max';
+import { useContext } from 'react';
+import { GlobalContext } from '@/models/global';
 
 type BtnEvent = 'enable' | 'reset' | 'estop'
 
 export default function Status() {
-  const global = useModel('global');
+  const global = useContext(GlobalContext);
 
   const handleBtnClick = (event: BtnEvent) => {
     const param : {

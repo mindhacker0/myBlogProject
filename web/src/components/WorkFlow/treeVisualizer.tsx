@@ -1,5 +1,5 @@
 import './treeVisualizer.less';
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { message as messageApi, Modal } from "antd";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
@@ -16,11 +16,11 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { State, BehaviourTree, convertMDSLToJSON, validateDefinition, BehaviourTreeOptions, NodeDetails } from "mistreevous";
 import { NodeType, ConnectorType } from "../../types/workflo";
 import { MainPanel } from '../MainPanel';
-import { useModel } from '@umijs/max';
 
 import eventBus from '@/common/eventBus';
 import { Pose, JointPositions, RobotInfo } from '@/types/robot';
 import { RootNodeDefinition } from 'mistreevous/dist/BehaviourTreeDefinition';
+import { GlobalContext } from '@/models/global';
 
 export type CanvasElements = { nodes: NodeType[], edges: ConnectorType[] };
 
@@ -100,7 +100,7 @@ const _createCanvasElements = (rootNodeDetails: NodeDetails): CanvasElements => 
 }
 
 export default function TreeVisualizer() {
-  const global = useModel('global');
+  const global = useContext(GlobalContext);
 
   // layoutId: string | null;
   // activeSidebarTab: SidebarTab;

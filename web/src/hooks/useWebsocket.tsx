@@ -1,14 +1,54 @@
-import { useState, useEffect, useRef } from 'react';
-// import WebSocket, { WebSocketServer } from 'ws';
-import { useModel } from '@umijs/max';
-import { degreesToRadians } from '@/utils/index';
+import { useState, useEffect, useRef, useContext } from 'react';
 import eventBus from '@/common/eventBus';
+import { GlobalContext } from '@/models/global';
 
 const RECONNECT_INTERVAL = 2000;
 const RECONNECT_MAX_COUNT = 200;
 
+class WebSocketManager {
+  static instance:WebSocketManager;
+  private ws:WebSocket | null = null;
+  url:string;
+  private reconnectCount: number = 0;
+  private reconnectTimer: NodeJS.Timeout | null = null;
+  constructor(url:string){
+    this.url = url;
+    this.createConnect();
+  }
+  createConnect(){
+    this.ws = new WebSocket(this.url);
+    this.reconnectCount = 0;
+    this.reconnectTimer = null;
+  }
+  static getInstance(){
+    return this.instance;
+  }
+  close(){
+    this.ws?.close();
+  }
+  reconnect(){
+    if (this.reconnectTimer !== null) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null
+    }
+    // 重连
+    if (this.reconnectCount <= RECONNECT_MAX_COUNT) {
+      this.reconnectTimer = setTimeout(() => {
+        console.log('websocket 重连第' + this.reconnectCount + '次');
+        this.createConnect();
+        this.reconnectCount++;
+      }, RECONNECT_INTERVAL);
+    } else {
+      this.ws?.close();
+    }
+  }
+  addEventListener(type:keyof WebSocketEventMap,callback:(this: WebSocket, ev: Event | CloseEvent | MessageEvent<any>) => any){
+    this.ws?.addEventListener(type,callback);
+  }
+}
+
 function useWebSocket(url: string) {
-  const global = useModel('global');
+  const global = useContext(GlobalContext);
   const [data, setData] = useState(null);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const reconnectCount = useRef(1);

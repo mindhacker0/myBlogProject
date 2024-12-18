@@ -1,9 +1,11 @@
-import { useModel } from '@umijs/max';
+import { GlobalContext } from '@/models/global';
 import '@/styles/com.less';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { useContext } from 'react';
 
 export default function Status() {
-  const global = useModel('global');
+  const global = useContext(GlobalContext);
+
 
   return (
     <div style={{
