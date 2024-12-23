@@ -5,25 +5,31 @@ import { useEffect, useState, useRef, useContext } from 'react';
 import { formatUnit, degreesToRadians, radiansToDegrees, reserveDecimal } from '@/utils/index';
 import useOutsideMouseUp from '@/hooks/useOutsideMouseUp';
 import { cloneDeep } from 'lodash';
-import { GlobalContext } from '@/models/global';
+import { RobotInfo } from '@/types/robot';
+import { EditorContext } from '../LowCodeEditor/editorContext';
 
-export default function ControllerX() {
-    const global = useContext(GlobalContext);
-    const jointPositions: { [key: string]: number | string } = global.robotInfo.jointPositions;
+interface ControllerJProps {
+    style?:React.CSSProperties;
+    data?: RobotInfo;
+}
+const ControllerJ:React.FC<ControllerJProps> = (props) => {
+    const {originJoints,socketSend} = useContext(EditorContext);
+    const [jointPositions,setJointPositions] = useState<{ [key: string]: number | string }>();
     const [list, setList] = useState<{ [key: string]: any }[]>([]);
     const currentClickButton = useRef<1 | 2 | null>(null);// 记录当前点的哪个按钮 正1反2
-    const { ref: straightRef, onMouseLeave: straightOnMouseLeave } = useOutsideMouseUp(() => {
+    const { ref: straightRef, onMouseLeave: straightOnMouseLeave } = useOutsideMouseUp<HTMLButtonElement>(() => {
         if (currentClickButton.current !== 1) { return }
+        console.log(Object.create(straightRef.current));
         const name = straightRef?.current?.dataset.name;
         // console.log('outside 正', name);
-        handleBtnOpt(name, 1, 'stop', 'straightRef onMouseLeave');
+        handleBtnOpt(name||"", 1, 'stop', 'straightRef onMouseLeave');
         currentClickButton.current = null;
     });
-    const { ref: reverseRef, onMouseLeave: reverseOnMouseLeave } = useOutsideMouseUp(() => {
+    const { ref: reverseRef, onMouseLeave: reverseOnMouseLeave } = useOutsideMouseUp<HTMLButtonElement>(() => {
         if (currentClickButton.current !== 2) { return }
         const name = reverseRef?.current?.dataset.name;
         // console.log('outside 反', name);
-        handleBtnOpt(name, -1, 'stop', 'reverseRef onMouseLeave');
+        handleBtnOpt(name||"", -1, 'stop', 'reverseRef onMouseLeave');
         currentClickButton.current = null;
     });
 
@@ -45,8 +51,11 @@ export default function ControllerX() {
     }
 
     useEffect(() => {
-        setList(updateListData(jointPositions, list))
-    }, [jointPositions]);
+        if(props.data?.jointPositions){
+            setJointPositions(props.data.jointPositions);
+            setList(updateListData(props.data.jointPositions, list))
+        }
+    }, [props.data?.jointPositions]);
 
     const handleBtnOpt = (item: string, direction: number, type: string, origin: string) => {
         if (origin === 'onMouseUp' && currentClickButton.current === null) {
@@ -59,7 +68,7 @@ export default function ControllerX() {
             "step": 0.5, //每次点动命令中机器人移动的量
             "speed": 50, //机器人移动的速率
         }
-        global.socketSend(param)
+        socketSend(param)
     }
 
     const update = (item: string, val: string, idx: number) => {
@@ -74,7 +83,7 @@ export default function ControllerX() {
                 [item]: parseFloat(val)
             },
         }
-        global.socketSend(param)
+        socketSend(param)
     }
 
     const _valid = (idx?: number) => {
@@ -125,27 +134,27 @@ export default function ControllerX() {
             "event": "update",
             "jointPositions": _form,
         }
-        global.socketSend(param)
+        socketSend(param)
     }
 
     const getMin = (key: string) => {
-        if (global.originJoints) {
-            const _val = global.originJoints[key]['limit']['lower'];
+        if (originJoints) {
+            const _val = originJoints[key]['limit']['lower'];
             return key === 'J4' ? _val * 1000 : _val === -3.14 ? -180 : radiansToDegrees(_val)
         }
         return -180
     }
 
     const getMax = (key: string) => {
-        if (global.originJoints) {
-            const _val = global.originJoints[key]['limit']['upper'];
+        if (originJoints) {
+            const _val = originJoints[key]['limit']['upper'];
             return key === 'J4' ? _val * 1000 : _val === 3.14 ? 180 : radiansToDegrees(_val)
         }
         return 180
     }
 
     return (
-        <div className="controller" style={{ width: 520 }}>
+        <div className="controller" style={{ width: 520,...props.style }}>
             {
                 list.map((item, idx) => <div className="row" key={idx}>
                     <div className="label">{_formatName(item.name)}</div>
@@ -191,8 +200,8 @@ export default function ControllerX() {
                     </div>
                     <div className="value" style={{ minWidth: 60 }}>{reserveDecimal(item.value)}</div>
                     <div className="unit">（
-                        {global.originJoints ?
-                            formatUnit(global.originJoints[item.name].jointType)
+                        {originJoints ?
+                            formatUnit(originJoints[item.name].jointType)
                             : null
                         }）
                     </div>
@@ -204,3 +213,5 @@ export default function ControllerX() {
         </div>
     );
 }
+
+export default ControllerJ;

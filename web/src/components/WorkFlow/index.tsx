@@ -3,6 +3,7 @@ import {Renderer, RendererProps} from 'amis';
 import TreeVisualizer from './treeVisualizer';
 
 interface MyRectProps extends RendererProps {
+  style?:React.CSSProperties;
 }
 
 
@@ -12,7 +13,6 @@ interface MyRectProps extends RendererProps {
 })
 export default class TreeVisualizerCom extends React.Component<MyRectProps> {
   render() {
-    console.log(this.props);
-    return <TreeVisualizer />;
+    return <TreeVisualizer style={this.props.style} />
   }
 }

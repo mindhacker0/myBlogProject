@@ -12,6 +12,8 @@ const enabledRenderers = [
   'service',// 数据容器
   'input-range', //滑块
   'tcp-control', //TCP控制块
+  'joint-control', //关节控制块
+  'robot-action-bar' // 状态栏
 ];
   
 export class ManagerEditorPlugin extends BasePlugin {

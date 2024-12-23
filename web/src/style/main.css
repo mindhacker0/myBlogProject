@@ -1,4 +1,4 @@
-/* 引入tailwindCSS */
-@import "~tailwindcss/base";
-@import "~tailwindcss/components";
-@import "~tailwindcss/utilities";
+/* 引入tailwindCSS 已包含css reset */
+@tailwind base;  
+@tailwind components;
+@tailwind utilities;

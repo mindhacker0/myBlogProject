@@ -2,22 +2,19 @@
 import { Button, Input } from 'antd';
 import './singleButtons.less';
 import { InfoCircleOutlined, MessageOutlined } from '@ant-design/icons';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Key } from 'react';
 import { formatDate } from '@/utils/date';
 import ReactJson from 'react-json-view';
-import { GlobalContext } from '@/models/global';
-const { TextArea } = Input;
-
-type KeyValue = {[k: string] : any};
+import { EditorContext } from './LowCodeEditor/editorContext';
 
 export default function SocketLog() {
-    const global = useContext(GlobalContext);
+    const {socketSendLog,clearSocketSendLog} = useContext(EditorContext);
     const [visible, setVisible] = useState(false);
     const handleBtnClick = () => {
         setVisible(!visible)
     }
     const _clear = () => {
-        global.clearSocketSendLog();
+        clearSocketSendLog();
     }
 
     return (
@@ -44,7 +41,7 @@ export default function SocketLog() {
                     overflow: 'auto',
                 }}>
                 {
-                    global.socketSendLog.map((v, idx) => {
+                    socketSendLog.map((v: { time: Date; content: string; }, idx: Key | null | undefined) => {
                         return (
                             <div key={idx}>
                                 <div>{formatDate(v.time)}</div>

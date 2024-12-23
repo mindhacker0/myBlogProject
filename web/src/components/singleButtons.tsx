@@ -2,12 +2,12 @@
 import { Button, Popconfirm } from 'antd';
 import './singleButtons.less';
 import { useContext } from 'react';
-import { GlobalContext } from '@/models/global';
+import { EditorContext } from './LowCodeEditor/editorContext';
 
 type BtnEvent = 'enable' | 'reset' | 'estop'
 
 export default function Status() {
-  const global = useContext(GlobalContext);
+  const {socketSend} = useContext(EditorContext);
 
   const handleBtnClick = (event: BtnEvent) => {
     const param : {
@@ -21,7 +21,7 @@ export default function Status() {
         param.status = true
         break;
     }
-    global.socketSend(param)
+    socketSend(param);
   }
 
   return (

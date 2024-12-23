@@ -1,5 +1,5 @@
 import './treeVisualizer.less';
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext, FC } from "react";
 import { message as messageApi, Modal } from "antd";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
@@ -20,7 +20,7 @@ import { MainPanel } from '../MainPanel';
 import eventBus from '@/common/eventBus';
 import { Pose, JointPositions, RobotInfo } from '@/types/robot';
 import { RootNodeDefinition } from 'mistreevous/dist/BehaviourTreeDefinition';
-import { GlobalContext } from '@/models/global';
+import { EditorContext } from '../LowCodeEditor/editorContext';
 
 export type CanvasElements = { nodes: NodeType[], edges: ConnectorType[] };
 
@@ -99,8 +99,9 @@ const _createCanvasElements = (rootNodeDetails: NodeDetails): CanvasElements => 
   return result;
 }
 
-export default function TreeVisualizer() {
-  const global = useContext(GlobalContext);
+
+const TreeVisualizer:React.FC<{style?:React.CSSProperties;}> = (props)=>{
+  const {socketSend} = useContext(EditorContext);
 
   // layoutId: string | null;
   // activeSidebarTab: SidebarTab;
@@ -157,8 +158,9 @@ export default function TreeVisualizer() {
 
   // 行为树的节点运行回调
   class Agent {
+    [key: string]: any;
+    
     MoveP(pose: string) {
-      console.log("MoveP:", global.robotInfo.jointPositions, pose)
       messageApi.info("MoveP: " + pose)
       // console.log('moveP', validateDefinition(pose))
       // return new Promise(function (resolve, reject) {
@@ -173,7 +175,7 @@ export default function TreeVisualizer() {
       }
       // 保存param到form
       form.current = param.pose;
-      global.socketSend(param);
+      socketSend(param);
 
       return new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -211,7 +213,7 @@ export default function TreeVisualizer() {
       }
       // 保存param到form
       form.current = param.jointPositions;
-      global.socketSend(param);
+      socketSend(param);
 
       return new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -333,7 +335,7 @@ export default function TreeVisualizer() {
       // console.log('test1---', ins.getTreeNodeDetails())
       // console.log('test2---', _createCanvasElements(ins.getTreeNodeDetails()))
       setCanvasElements(_createCanvasElements(ins.getTreeNodeDetails()))
-    }, 100);
+    }, 100) as unknown as NodeJS.Timeout;
 
   }
 
@@ -368,7 +370,7 @@ export default function TreeVisualizer() {
 
 
   return (
-    <div className="tree-visualizer">
+    <div className="tree-visualizer w-[500px] h-[500px]" style={props?.style}>
       {/* <BehaviorTreeView {...positioned} /> */}
 
       <MainPanel
@@ -385,6 +387,7 @@ export default function TreeVisualizer() {
   );
 }
 
+export default TreeVisualizer;
 // 节点一：
 
 // 用户点击开始后，发送MoveP移动到B点的任务命令。即：webSocket发送“更新末端位置”的指令，位置为B点位置。

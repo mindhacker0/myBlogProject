@@ -1,31 +1,34 @@
 import {IScopedContext, Renderer, RendererProps, ScopedContext} from 'amis';
-import ControllerX from './controllerX';
+import ControllerJ from './controllerJ';
 import React from 'react';
 import { RobotInfo } from '@/types/robot';
 
-interface ControllerXProps extends RendererProps {
+interface ControllerJProps extends RendererProps {
     style?:React.CSSProperties;
 }
 
 @Renderer({
-  type: 'tcp-control',
-  name: 'tcp-control'
+  type: 'joint-control',
+  name: 'joint-control'
 })
-export default class ControllerXCom extends React.Component<ControllerXProps, object> {
+export default class ControllerJCom extends React.Component<ControllerJProps, object> {
     static contextType = ScopedContext;
     static propsList: string[] = ['style', 'className', 'data'];
 
     declare context: React.ContextType<typeof ScopedContext>;
 
-    constructor(props: ControllerXProps) {
+    constructor(props: ControllerJProps) {
         super(props);
         const scoped = props.scopeRef?.() as IScopedContext;
         scoped?.registerComponent(this);
+    }
+    componentDidMount(): void {
+        console.log("render controllerJ",this);
     }
     componentWillUnmount(): void {
         this.context.unRegisterComponent(this);
     }
     render() {
-        return <ControllerX style={this.props.style} data={this.props.data as RobotInfo}/>;
+        return <ControllerJ style={this.props.style} data={this.props.data as RobotInfo}/>;
     }
 }

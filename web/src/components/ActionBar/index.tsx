@@ -1,23 +1,22 @@
 import {IScopedContext, Renderer, RendererProps, ScopedContext} from 'amis';
-import ControllerX from './controllerX';
+import Status from './status';
 import React from 'react';
-import { RobotInfo } from '@/types/robot';
 
-interface ControllerXProps extends RendererProps {
+interface ActionBarProps extends RendererProps {
     style?:React.CSSProperties;
 }
 
 @Renderer({
-  type: 'tcp-control',
-  name: 'tcp-control'
+  type: 'robot-action-bar',
+  name: 'robot-action-bar'
 })
-export default class ControllerXCom extends React.Component<ControllerXProps, object> {
+export default class ActionBarCom extends React.Component<ActionBarProps> {
     static contextType = ScopedContext;
     static propsList: string[] = ['style', 'className', 'data'];
 
-    declare context: React.ContextType<typeof ScopedContext>;
+    declare context: IScopedContext;
 
-    constructor(props: ControllerXProps) {
+    constructor(props: ActionBarProps) {
         super(props);
         const scoped = props.scopeRef?.() as IScopedContext;
         scoped?.registerComponent(this);
@@ -26,6 +25,6 @@ export default class ControllerXCom extends React.Component<ControllerXProps, ob
         this.context.unRegisterComponent(this);
     }
     render() {
-        return <ControllerX style={this.props.style} data={this.props.data as RobotInfo}/>;
+        return (<div style={this.props.style}><Status /></div>);
     }
 }

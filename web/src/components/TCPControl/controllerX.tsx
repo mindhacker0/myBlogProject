@@ -6,26 +6,31 @@ import regExp from '@/utils/regExp';
 import { formatUnit, capitalizeFirstLetter, reserveDecimal } from '@/utils/index';
 import { cloneDeep } from 'lodash';
 import useOutsideMouseUp from '@/hooks/useOutsideMouseUp';
-import { GlobalContext } from '@/models/global';
+import { RobotInfo } from '@/types/robot';
+import { EditorContext } from '../LowCodeEditor/editorContext';
 
-export default function ControllerX() {
-    const global = useContext(GlobalContext);
-    const robotInfo = global.robotInfo;
-    const pose : { [k : string]: number | string } = robotInfo.pose;
+interface ControllerXProps {
+    style?:React.CSSProperties;
+    data?: RobotInfo;
+}
+const ControllerX:React.FC<ControllerXProps> = (props) => {
+    const robotInfo = props.data;
+    const pose = props.data?.pose;
+    const {socketSend} = useContext(EditorContext);
     const [list, setList] = useState<{[key: string]: any}[]>([]);
     const currentClickButton = useRef<1 | 2 | null>(null);// 记录当前点的哪个按钮 正1反2
-    const { ref: straightRef, onMouseLeave: straightOnMouseLeave } = useOutsideMouseUp(() => {
+    const { ref: straightRef, onMouseLeave: straightOnMouseLeave } = useOutsideMouseUp<HTMLButtonElement>(() => {
         if (currentClickButton.current !== 1) { return }
         const name = straightRef?.current?.dataset.name;
         // console.log('outside 正', name);
-        handleBtnOpt(name, 1, 'stop', 'straightRef onMouseLeave');
+        handleBtnOpt(name||"", 1, 'stop', 'straightRef onMouseLeave');
         currentClickButton.current = null;
     });
-    const { ref: reverseRef, onMouseLeave: reverseOnMouseLeave } = useOutsideMouseUp(() => {
+    const { ref: reverseRef, onMouseLeave: reverseOnMouseLeave } = useOutsideMouseUp<HTMLButtonElement>(() => {
         if (currentClickButton.current !== 2) { return }
         const name = reverseRef?.current?.dataset.name;
         // console.log('outside 反', name);
-        handleBtnOpt(name, -1, 'stop', 'reverseRef onMouseLeave');
+        handleBtnOpt(name||"", -1, 'stop', 'reverseRef onMouseLeave');
         currentClickButton.current = null;
     });
 
@@ -43,7 +48,7 @@ export default function ControllerX() {
     }
 
     useEffect(() => {
-        setList(updateListData(pose, list))
+       if(pose) setList(updateListData(pose, list))
     }, [pose]);
 
     const handleBtnOpt = (item: string, direction: number, type: string, origin: string) => {
@@ -67,7 +72,7 @@ export default function ControllerX() {
             }
             param.speed = 50
         }
-        global.socketSend(param)
+        socketSend(param)
     }
 
     const _valid = (idx?: number) => {
@@ -112,11 +117,11 @@ export default function ControllerX() {
         const param = {
             "event": "update", 
             "pose": {
-                ...robotInfo.pose,
+                ...robotInfo?.pose,
                 [item]: parseFloat(val)
             },
         }
-        global.socketSend(param)
+        socketSend(param)
     }
 
     const submit = () => {
@@ -131,11 +136,11 @@ export default function ControllerX() {
             "event": "update", 
             "pose": _form,
         }
-        global.socketSend(param)
+        socketSend(param);
     }
 
     return (
-        <div className="controller" style={{ width: 380 }}>
+        <div className="controller" style={{ width: 380,...props.style }}>
             {list.map((item, idx) => <div className="row" key={idx}>
                 <div className="label">{capitalizeFirstLetter(item.name)}</div>
                 <div className="btns">
@@ -180,4 +185,5 @@ export default function ControllerX() {
             </div>
         </div>
     );
-  }
+}
+export default ControllerX;

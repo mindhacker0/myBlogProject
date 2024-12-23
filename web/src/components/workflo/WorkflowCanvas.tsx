@@ -36,10 +36,10 @@ export type WorkflowCanvasState = {
  */
 export class WorkflowCanvas extends React.Component<WorkflowCanvasProps, WorkflowCanvasState> {
 	/** A reference to the canvas wrapper. */
-	private readonly _canvasWrapperRef: React.RefObject<HTMLDivElement>;
+	private readonly _canvasWrapperRef: React.RefObject<HTMLDivElement|null>;
 
 	/** A reference to root nodes container. */
-	private readonly _rootNodesContainerRef: React.RefObject<HTMLDivElement>;
+	private readonly _rootNodesContainerRef: React.RefObject<HTMLDivElement|null>;
 
 	/** The last canvas drag position. */
 	private _lastCanvasDragPosition: { x: number, y: number } | null = null;
@@ -51,8 +51,8 @@ export class WorkflowCanvas extends React.Component<WorkflowCanvasProps, Workflo
 	public constructor(props: WorkflowCanvasProps) {
         super(props);
 
-		this._canvasWrapperRef = React.createRef();
-		this._rootNodesContainerRef = React.createRef();
+		this._canvasWrapperRef = React.createRef<HTMLDivElement>();
+		this._rootNodesContainerRef = React.createRef<HTMLDivElement>();
 
         // Set the initial state for the component.
         this.state = {
