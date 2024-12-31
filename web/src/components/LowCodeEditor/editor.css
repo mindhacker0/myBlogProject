@@ -1,7 +1,0 @@
-.hmi-editor .ae-Editor-hlbox.selected{
-    background: transparent;
-}
-.hmi-editor .ae-Editor-hlbox.isFreeContainerElem.selected{
-    pointer-events: none;
-    cursor: default;
-}

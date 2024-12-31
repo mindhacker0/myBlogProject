@@ -1,4 +1,0 @@
-/* 引入tailwindCSS 已包含css reset */
-@tailwind base;  
-@tailwind components;
-@tailwind utilities;
